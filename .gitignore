@@ -1,0 +1,8 @@
+
+lib/
+
+bin/
+
+\.DS_Store
+
+*.cfg

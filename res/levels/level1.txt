@@ -1,0 +1,2 @@
+P res/img/player/800600/800600.png 300 300
+M res/maps/mapa1.txt
