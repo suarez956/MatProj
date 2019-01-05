@@ -39,8 +39,8 @@ public class Tile extends Entity {
 	public void update(GameContainer arg0, int arg1) throws SlickException {
 		super.update(arg0, arg1);
 		if(world instanceof Game) {
-			x-=Player.delta_x;
-			//y-=Player.delta_y;
+			x+=(Player.delta_x)*4;
+			y+=(Player.delta_y)*4;
 		}
 		
 	}

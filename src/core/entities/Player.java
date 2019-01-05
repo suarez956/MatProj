@@ -69,44 +69,7 @@ public class Player extends Entity {
 	public void update(GameContainer gc, int arg) throws SlickException {
 		super.update(gc, arg);
 		n_height = gc.getHeight();
-		/*if (check("LEFT")) {														//Kotrola stisknutí kl. LEFT
-			currentAnim = "MOVE_LEFT";												//Přepnutí animace na "MOVE_LEFT"	
-			orientation = false;													//viz. orientace boolean
-			if (collide("Tile", x-10,y)==null) {									//kolize se SOLID blokem nebo koncem okna
-				x-=0.9;
-				delta_x-=x;
-			}
-		}
-		else if (check("RIGHT")) {
-			currentAnim = "MOVE_RIGHT";
-			orientation = true;
-			if (collide("Tile", x+10,y)==null) {
-				x+=0.9;
-				delta_x+=x;
-			}
-		}
-		else {
-			if(orientation==true) {
-				currentAnim="NO_MOVE_R";
-			}else {
-				currentAnim="NO_MOVE_L";
-			}
-			
-		}
-		 if (check("JUMP")) {
-			if(!fall && n<=50) {
-				n++;
-				y--;
-				delta_y-=(y*0.1f);
-			}
-			else{
-				n=0;
-				fall = true;
-			}
-			if (collide("Tile",x,y)!=null) {
-				fall = false;
-			}
-		}
+		/*
 		 if(fall) {
 			 if (y+100<=gc.getHeight()) {
 				 y++;
@@ -130,26 +93,35 @@ public class Player extends Entity {
 		if (check("LEFT")) {														//Kotrola stisknutí kl. LEFT
 			currentAnim = "MOVE_LEFT";												//Přepnutí animace na "MOVE_LEFT"	
 			orientation = false;													//viz. orientace boolean
-			if (collide("Tile", x-10,y)==null) {									//kolize se SOLID blokem nebo koncem okna
-				x-=0.00000001f;
-				System.err.println("DELTA X: "+delta_x);
-			}
+			if (collide("Tile", x-5,y+10)==null) {									//kolize se SOLID blokem nebo koncem okna
+				previous_x = x;
+				x-=1f;
+				delta_x = previous_x-x;
+				}
 		}
 		else if (check("RIGHT")) {
 			currentAnim = "MOVE_RIGHT";
 			orientation = true;
-			if (collide("Tile", x+10,y)==null) {
-				System.err.println("DELTA X: "+delta_x);
+			if (collide("Tile", x+5,y+10)==null) {
+				previous_x = x;
+				x+=1f;
+				delta_x = previous_x-x;
 			}
 		}else {
+			delta_x = 0;
 			if(orientation==true) {
 				currentAnim="NO_MOVE_R";
 			}else {
 				currentAnim="NO_MOVE_L";
 			}
-			
 		}
-		
+		if(collide("Tile", x, y+10)!=null) {
+			delta_y = 0;
+		}else {
+			previous_y = y;
+			y+=0.25f;
+			delta_y = previous_y-y;
+		}
 	}
 	
 	@Override

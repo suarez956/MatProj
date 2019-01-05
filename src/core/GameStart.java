@@ -61,11 +61,11 @@ public class GameStart extends StateBasedGame {
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws SlickException, FileNotFoundException {
-		System.setProperty("java.library.path", "lib"); // linux, win
-		System.setProperty("org.lwjgl.librarypath", new File("lib/natives").getAbsolutePath()); // linux, win
+		System.setProperty("java.library.path", "lib"); 
+		System.setProperty("org.lwjgl.librarypath", new File("lib/natives").getAbsolutePath());
 		System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
 		cfg.load();
-		ME.debugEnabled = true;
+		ME.debugEnabled = false;
 		app = new AppGameContainer(new GameStart("hra"), cfg.getHeight(), cfg.getWidth(), false);
 		app.setTargetFrameRate(120);
 		app.start();
@@ -123,7 +123,9 @@ public class GameStart extends StateBasedGame {
 		}
 		if (key == Input.KEY_F1) {
 			show_fps = !show_fps;
-			
+		}
+		if (key == Input.KEY_M){
+			ME.debugEnabled = show_fps;
 		}
 		if(key == Input.KEY_H) {
 			HighScore.db_read("jdbc:mysql://localhost/highscore", "java", "NLzWCuirNwbHMVye", 1);
