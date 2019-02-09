@@ -15,12 +15,14 @@ import core.LevelRendering.LevelManager;
 import core.LevelRendering.Tile;
 import core.LevelRendering.TileSet;
 import core.entities.Player;
+import core.items.Gem;
 import it.randomtower.engine.World;
 
 
 public class Game extends World {
 	private Player player;
 	private LevelManager lm;
+	public static int score = 0;
 	//TODO Collision Creature with player ==> Health down
 	//TODO Collision with world
 	
@@ -41,14 +43,19 @@ public class Game extends World {
 		for (Tile tile : tiles) {
 			add(tile);
 		}
+		for(Gem gem : lm.getGems()) {
+			add(gem);
+		}
 	}
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		super.render(container, game, g);
 		if (((GameStart) game).getShow_FPS()) {
-			g.drawString("fps: " + container.getFPS(), 0, 0);
+			String string = "fps: " + container.getFPS()+" X:"+player.x+" Y:"+player.y;
+			g.drawString(string, 0, 0);
 		}
+		g.drawString(String.valueOf(score), 0, 0);
 
 	}
 
@@ -64,5 +71,6 @@ public class Game extends World {
 		if (Keyboard.isKeyDown(Keyboard.KEY_F10)&&game.getCurrentStateID()==1) {
 			game.enterState(2);
 		}
+		
 	}
 }

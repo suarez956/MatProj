@@ -13,7 +13,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import core.GameStart;
+import core.LevelRendering.Tile;
+import core.items.Gem;
 import core.other.Config;
+import core.state.Game;
 import it.randomtower.engine.entity.Entity;
 
 @SuppressWarnings("unused")
@@ -25,7 +28,7 @@ public class Player extends Entity {
 	private boolean orientation = false; 	// false=> -> ; true => <-
 	private float n_height;
 	private File player_config;
-	private int n = 0;
+	private double jump_diff = 0;
 	
 	static public float delta_x = 0f;
 	static public float delta_y = 0f;
@@ -47,7 +50,7 @@ public class Player extends Entity {
 	}
 
 	private void setCollision(String name) {
-		setHitBox(0, 0, 42, 95);
+		setHitBox(0, 0, 50, 88);
 		addType(name);
 	}
 	
@@ -66,61 +69,70 @@ public class Player extends Entity {
 	}
 	
 	@Override
+	public void collisionResponse(Entity other) {
+		super.collisionResponse(other);
+		if (other instanceof Gem) {
+			System.out.println("Hitnutý gem");
+			Game.score+=100;
+			Gem gem = (Gem)other;
+			gem.destroy();
+		}
+		if (other instanceof Tile) {
+			System.out.println("Hitnutý Tile");
+		}
+	}
+	
+	@Override
 	public void update(GameContainer gc, int arg) throws SlickException {
 		super.update(gc, arg);
 		n_height = gc.getHeight();
-		/*
-		 if(fall) {
-			 if (y+100<=gc.getHeight()) {
-				 y++;
-				 System.out.println(y);
-				 delta_y+=(y*0.1f);
-			}
-			else {
-					fall = false;
-				}
-		 }
-		if (!check("JUMP")) {
-			fall = true;
-			if (fall && y+100<=gc.getHeight()) {
-				y++;
-				System.out.println(y);
-			}
-		}
-		*/
 		float previous_x = 0f;
 		float previous_y = 0f;
-		if (check("LEFT")) {														//Kotrola stisknutÃ­ kl. LEFT
-			currentAnim = "MOVE_LEFT";												//PÅ™epnutÃ­ animace na "MOVE_LEFT"	
-			orientation = false;													//viz. orientace boolean
-			if (collide("Tile", x-5,y+10)==null) {									//kolize se SOLID blokem nebo koncem okna
-				previous_x = x;
-				x-=1f;
-				delta_x = previous_x-x;
-				}
+		if(collide("Tile", x-5, y)==null && check("LEFT")) {
+				currentAnim = "MOVE_LEFT";								
+				orientation = false;
+					previous_x = x;
+					x-=0.5;
+					delta_x = previous_x-x;		
 		}
-		else if (check("RIGHT")) {
-			currentAnim = "MOVE_RIGHT";
-			orientation = true;
-			if (collide("Tile", x+5,y+10)==null) {
-				previous_x = x;
-				x+=1f;
-				delta_x = previous_x-x;
-			}
-		}else {
-			delta_x = 0;
+		else if(collide("Tile", x+5, y)==null && check("RIGHT")) {
+				currentAnim = "MOVE_RIGHT";
+				orientation = true;
+					previous_x = x;
+					x+=0.5;
+					delta_x = previous_x-x;
+		}
+		else {
+			delta_x = 0f;
 			if(orientation==true) {
 				currentAnim="NO_MOVE_R";
 			}else {
 				currentAnim="NO_MOVE_L";
 			}
 		}
-		if(collide("Tile", x, y+10)!=null) {
-			delta_y = 0;
-		}else {
-			previous_y = y;
-			y+=0.25f;
-			delta_y = previous_y-y;
+		if(collide("Tile",x,y+5)==null) {
+			if(!check("JUMP") || fall) {
+				previous_y = y;
+				y+=0.5;
+				delta_y = previous_y-y;
+			}
+		}
+		else {
+			delta_y=0;
+			fall = false;
+			jump_diff=0;
+		}
+		if(check("JUMP") && !fall) {
+			System.out.println(jump_diff);
+			if(jump_diff<=50 && !fall && collide("Tile",x,y-5)==null) {
+				previous_y = y;
+				y-=0.5;
+				delta_y = previous_y-y;
+				jump_diff+=5;
+			}
+			else {
+				fall =true;
+			}
 		}
 	}
 	

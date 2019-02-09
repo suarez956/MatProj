@@ -66,8 +66,8 @@ public class GameStart extends StateBasedGame {
 		System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
 		cfg.load();
 		ME.debugEnabled = false;
-		app = new AppGameContainer(new GameStart("hra"), cfg.getHeight(), cfg.getWidth(), false);
-		app.setTargetFrameRate(120);
+		app = new AppGameContainer(new GameStart("Project Caveman"), cfg.getHeight(), cfg.getWidth(), false);
+		app.setTargetFrameRate(60);
 		app.start();
 		app.setShowFPS(true);
 	}
@@ -125,7 +125,7 @@ public class GameStart extends StateBasedGame {
 			show_fps = !show_fps;
 		}
 		if (key == Input.KEY_M){
-			ME.debugEnabled = show_fps;
+			ME.debugEnabled = !ME.debugEnabled;
 		}
 		if(key == Input.KEY_H) {
 			HighScore.db_read("jdbc:mysql://localhost/highscore", "java", "NLzWCuirNwbHMVye", 1);

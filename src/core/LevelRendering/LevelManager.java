@@ -7,16 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 import core.GameStart;
 import core.entities.Player;
+import core.items.Gem;
 import it.randomtower.engine.entity.Entity;
 
 public class LevelManager extends Entity{
 
-	private ArrayList<Entity> enemies ;
+	private ArrayList<Entity> enemies;
+	private ArrayList<Gem> gems = new ArrayList<>();
 	private ArrayList<File> levels;
 	private Player player;
 	private Map mapa;
@@ -54,7 +57,7 @@ public class LevelManager extends Entity{
 	}
 	
 	
-	public void loadLevel(int index, StateBasedGame game) {
+	public void loadLevel(int index, StateBasedGame game){
 		File curr_level = levels.get(index);
 		this.game = game;
 		try {
@@ -66,12 +69,19 @@ public class LevelManager extends Entity{
 						try {
 							player = new Player(Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), new SpriteSheet(splitted[1], 50, 100), ((GameStart) game).get_config());
 						} catch (Exception e) {
-							// TODO: handle exception
+							System.err.println("Nepovedlo se vytvořit hráče!");
 						}
 					}
 					if(string.equals("M")) {
 						createMap(splitted[1]);
 						}
+					if(string.equals("G")) {
+						try {
+							gems.add(new Gem(Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), new Image(splitted[1]), false));
+						} catch (Exception e) {
+							System.err.println("Nepodařilo se přidat další gem!");
+						}
+					}
 					}
 				} 
 			sc.close();	
@@ -104,5 +114,7 @@ public class LevelManager extends Entity{
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}
-	
+	 public ArrayList<Gem> getGems(){
+		 return gems;
+	 }
 }

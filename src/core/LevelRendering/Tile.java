@@ -13,34 +13,16 @@ public class Tile extends Entity {
 
 	public Tile(float x, float y, Image image) {
 		super(x, y, image);
+		setHitBox(0, 0, image.getWidth(), image.getHeight());
 		addType("Tile");
-	}
-
-	private String colide_type;
-	private boolean collidable;
-	
-	
-	public String getColide_type() {
-		return colide_type;
-	}
-	
-	public boolean getCollidable() {
-		return collidable;
-	}
-	public void setColide_type(String colide_type) {
-		this.colide_type = colide_type;
-	}
-
-	public void setCollidable(boolean collidable) {
-		this.collidable = collidable;
 	}
 	
 	@Override
 	public void update(GameContainer arg0, int arg1) throws SlickException {
 		super.update(arg0, arg1);
 		if(world instanceof Game) {
-			x+=(Player.delta_x)*4;
-			y+=(Player.delta_y)*4;
+			x+=(Player.delta_x)*10;
+			y+=(Player.delta_y)*10;
 		}
 		
 	}
