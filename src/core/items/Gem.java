@@ -31,6 +31,13 @@ public class Gem extends Entity{
 			x+=(Player.delta_x)*10;
 			y+=(Player.delta_y)*10;
 		}
+		if (collide("PLAYER", x, y) != null) {
+				this.destroy();
+				Game.score+=50;
+				if (ender) {
+					Game.score+=500;
+				}
+		}
 	}
 	
 }

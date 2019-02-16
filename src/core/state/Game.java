@@ -1,7 +1,6 @@
 package core.state;
 
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
@@ -13,7 +12,6 @@ import org.newdawn.slick.state.StateBasedGame;
 import core.GameStart;
 import core.LevelRendering.LevelManager;
 import core.LevelRendering.Tile;
-import core.LevelRendering.TileSet;
 import core.entities.Player;
 import core.items.Gem;
 import it.randomtower.engine.World;
@@ -25,8 +23,6 @@ public class Game extends World {
 	public static int score = 0;
 	//TODO Collision Creature with player ==> Health down
 	//TODO Collision with world
-	
-	
 	
 	
 	public Game(int id, GameContainer container) throws SlickException {
@@ -56,7 +52,7 @@ public class Game extends World {
 			g.drawString(string, 0, 0);
 		}
 		g.drawString(String.valueOf(score), 0, 0);
-
+		g.drawString("POS_ HARC: " + player.x+" - "+player.y+"; POS_DIAM: " +lm.getGems().get(0).x+" - "+lm.getGems().get(0).y, 0, 10);
 	}
 
 	@Override

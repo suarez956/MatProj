@@ -14,7 +14,6 @@ import org.newdawn.slick.state.StateBasedGame;
 import core.LevelRendering.LevelManager;
 import core.other.Config;
 import core.other.Config_Window;
-import core.other.HighScore;
 import core.state.Game;
 import core.state.GameCompleted;
 import core.state.Intro;
@@ -38,7 +37,7 @@ public class GameStart extends StateBasedGame {
 	}
 
 	static Config cfg = new Config("config.cfg");
-	Config_Window config_window;
+	public static Config_Window config_window;
 	static AppGameContainer app;
 	public boolean show_fps = false;
 	public static LevelManager lm = new LevelManager(0, 0);
@@ -65,9 +64,10 @@ public class GameStart extends StateBasedGame {
 		System.setProperty("org.lwjgl.librarypath", new File("lib/natives").getAbsolutePath());
 		System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
 		cfg.load();
+		config_window = new Config_Window(cfg);
 		ME.debugEnabled = false;
 		app = new AppGameContainer(new GameStart("Project Caveman"), cfg.getHeight(), cfg.getWidth(), false);
-		app.setTargetFrameRate(60);
+		app.setTargetFrameRate(1024);
 		app.start();
 		app.setShowFPS(true);
 	}
@@ -96,7 +96,6 @@ public class GameStart extends StateBasedGame {
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 		if (key == Input.KEY_F2) {
-			config_window = new Config_Window(cfg);
 			if (config_window.isVisible()) {
 				config_window.setVisible(false);
 			} else {
@@ -127,10 +126,6 @@ public class GameStart extends StateBasedGame {
 		if (key == Input.KEY_M){
 			ME.debugEnabled = !ME.debugEnabled;
 		}
-		if(key == Input.KEY_H) {
-			HighScore.db_read("jdbc:mysql://localhost/highscore", "java", "NLzWCuirNwbHMVye", 1);
-		}
-		
 	}
 
 	@Override

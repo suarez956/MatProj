@@ -1,13 +1,10 @@
 package core.state;
 
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
-
-import core.other.HighScore;
 import it.randomtower.engine.World;
 
 public class LevelDone extends World{
@@ -26,10 +23,7 @@ public class LevelDone extends World{
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
 		super.update(arg0, arg1, arg2);
-		if (Keyboard.isKeyDown(Keyboard.KEY_P)&& arg1.getCurrentStateID()==4) {
-			HighScore.db_write("jdbc:mysql://localhost/highscore", "java", "NLzWCuirNwbHMVye", "00:10:30", 2, "honza");
-			HighScore.db_write("jdbc:mysql://localhost/highscore", "java", "NLzWCuirNwbHMVye", "00:20:30", 1, "honza");
-		}
+		
 	}
 
 }

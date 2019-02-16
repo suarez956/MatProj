@@ -50,36 +50,22 @@ public class Player extends Entity {
 	}
 
 	private void setCollision(String name) {
-		setHitBox(0, 0, 50, 88);
+		setHitBox(4, 0, 46, 88);
 		addType(name);
 	}
 	
 	private void setAnimations(SpriteSheet playersheet) {
 		setGraphic(playersheet);
 		duration = 150;
-		addAnimation("NO_MOVE_L", false, 0, 3);
-		addAnimation("NO_MOVE_R", false, 0, 4);
-		addAnimation("MOVE_LEFT", true, 0, 0, 1, 2, 3);
-		addAnimation("MOVE_RIGHT", true, 0, 4, 5, 6, 7);
+		addAnimation("NO_MOVE_L", false, 0, 2);
+		addAnimation("NO_MOVE_R", false, 1, 2);
+		addAnimation("MOVE_LEFT", true, 0, 2, 3, 4, 5, 0, 1);
+		addAnimation("MOVE_RIGHT", true, 1, 2, 3, 4, 5, 0, 1);
 		//addAnimation("THROW", true,2,0,1,2);
 		//addAnimation("JUMP", true, 3, 0,1,2,3,3,2,1);
 	}
 	public float getHeight() {
 		return n_height;
-	}
-	
-	@Override
-	public void collisionResponse(Entity other) {
-		super.collisionResponse(other);
-		if (other instanceof Gem) {
-			System.out.println("Hitnutý gem");
-			Game.score+=100;
-			Gem gem = (Gem)other;
-			gem.destroy();
-		}
-		if (other instanceof Tile) {
-			System.out.println("Hitnutý Tile");
-		}
 	}
 	
 	@Override
@@ -123,12 +109,11 @@ public class Player extends Entity {
 			jump_diff=0;
 		}
 		if(check("JUMP") && !fall) {
-			System.out.println(jump_diff);
 			if(jump_diff<=50 && !fall && collide("Tile",x,y-5)==null) {
 				previous_y = y;
-				y-=0.5;
+				y-=0.3;
 				delta_y = previous_y-y;
-				jump_diff+=5;
+				jump_diff+=3;
 			}
 			else {
 				fall =true;

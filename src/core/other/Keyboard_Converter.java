@@ -4,7 +4,7 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 /**
  * 
- * <h1>Converts key from LWJGL Keyboard layout to Slick2D Keybord layout</h1>
+ * <h1>Converts key from Java Keyboard layout to Slick2D Keybord layout</h1>
  * 
  * */
 public interface Keyboard_Converter{	
