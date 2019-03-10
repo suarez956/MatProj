@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="skeleton_data" version="1.3.0" audacityversion="2.3.0" sel0="0.0000000000" sel1="1.0117913832" vpos="0" h="0.0000000000" zoom="1056.5625000000" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="encoder" value="Lavf54.15.102"/>
+	</tags>
+	<wavetrack name="bones-2" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="44620">
+				<waveblock start="0">
+					<simpleblockfile filename="e080803b.au" len="44620" min="-0.452362" max="0.535553" rms="0.045209"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="skeleton_walk" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="24000" gain="8.912509" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="24283">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808386.au" len="24283" min="-0.065431" max="0.071256" rms="0.004526"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="2">
+				<controlpoint t="0.365335699497" val="1.457746505737"/>
+				<controlpoint t="1.011771665188" val="1.449863936926"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="skeleton_walk" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="24000" gain="8.912509" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="24283">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808544.au" len="24283" min="-0.099907" max="0.077429" rms="0.006167"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="2">
+				<controlpoint t="0.365335699497" val="1.457746505737"/>
+				<controlpoint t="1.011771665188" val="1.449863936926"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+</project>

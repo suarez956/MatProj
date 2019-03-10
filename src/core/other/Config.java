@@ -15,8 +15,6 @@ import org.newdawn.slick.Input;
 public class Config {
 
     //CONFIG PARAMATERS
-    private int width = 0;
-    private int height = 0;
     private static int key_up = 0;
     private static int key_down = 0;
     private static int key_left = 0;
@@ -55,40 +53,27 @@ public class Config {
     public void load() throws FileNotFoundException {
         in = new Scanner(new FileReader(config_file));
         String x = "";
-        for (@SuppressWarnings("unused")
-		int i = 0; in.hasNextLine(); i++) {
+        for (@SuppressWarnings("unused") 
+        		int i = 0; in.hasNextLine(); i++) {
             x = x + " " + in.nextLine();
         }
         String splitted[] = x.split(" ");
         for (int i = 1; i < splitted.length; i++) {
             switch (i) {
                 case 1:
-                    height = Integer.parseInt(splitted[i]);
-                    //System.out.println("H: "+height);
+                    key_up = Integer.parseInt(splitted[i]);
                     break;
                 case 2:
-                    width = Integer.parseInt(splitted[i]);
-                    //System.out.println("W: "+width);
+                    key_down = Integer.parseInt(splitted[i]);
                     break;
                 case 3:
-                    key_up = Integer.parseInt(splitted[i]);
-                    //System.out.println("K_UP: "+key_up);
+                    key_left = Integer.parseInt(splitted[i]);
                     break;
                 case 4:
-                    key_down = Integer.parseInt(splitted[i]);
-                    //System.out.println("K_DOWN: "+key_down);
+                    key_right = Integer.parseInt(splitted[i]);
                     break;
                 case 5:
-                    key_left = Integer.parseInt(splitted[i]);
-                    //System.out.println("K_LEFT: "+key_left);
-                    break;
-                case 6:
-                    key_right = Integer.parseInt(splitted[i]);
-                    //System.out.println("K_RIGHT: "+key_right);
-                    break;
-                case 7:
                 	key_special = Integer.parseInt(splitted[i]);
-                	//System.out.println("K_SPECIAL: "+key_special);
                 	break;
             }
         }
@@ -97,15 +82,13 @@ public class Config {
 
     //DEFAULT VALUES FOR CONFIG
     protected final void defaults() throws IOException {
-        height = 800;
-        width = 600;
         key_up = Input.KEY_UP;
         key_down = Input.KEY_DOWN;
         key_left = Input.KEY_LEFT;
         key_right = Input.KEY_RIGHT;
         key_special = Input.KEY_LCONTROL;
         
-        ArrayList<String> lines = new ArrayList<>(Arrays.asList(Integer.toString(height), Integer.toString(width), Integer.toString(key_up), Integer.toString(key_down), Integer.toString(key_left), Integer.toString(key_right),Integer.toString(key_special)));
+        ArrayList<String> lines = new ArrayList<>(Arrays.asList(Integer.toString(key_up), Integer.toString(key_down), Integer.toString(key_left), Integer.toString(key_right),Integer.toString(key_special)));
         try {
             if (this.config_file.exists()) {
             	Files.delete(config_file.toPath());
@@ -127,7 +110,7 @@ public class Config {
     //SAVE
     
     public void save() throws IOException{
-    	ArrayList<String> lines = new ArrayList<>(Arrays.asList(Integer.toString(height), Integer.toString(width), Integer.toString(key_up), Integer.toString(key_down), Integer.toString(key_left), Integer.toString(key_right),Integer.toString(key_special)));
+    	ArrayList<String> lines = new ArrayList<>(Arrays.asList(Integer.toString(key_up), Integer.toString(key_down), Integer.toString(key_left), Integer.toString(key_right),Integer.toString(key_special)));
         try {
             if (this.config_file.exists()) {
             	Files.delete(config_file.toPath());
@@ -143,7 +126,7 @@ public class Config {
             bw.write("\n");
         }
         bw.close();
-    	JOptionPane.showMessageDialog(null, "ÃšspÄ›Å¡nÄ› uloÅ¾eno.");
+    	JOptionPane.showMessageDialog(null, "Úspìšnì uloženo!.");
     }
     
     
@@ -167,13 +150,6 @@ public class Config {
     
     //GETTERS
 
-    /**
-     *
-     * @return
-     */
-    public int getHeight() {
-        return height;
-    }
 
     /**
      *
@@ -208,49 +184,18 @@ public class Config {
     }
 
     /**
-     *
-     * @return
-     */
-    public int getWidth() {
-        return width;
-    }
-    /**
      * @return
      * 
      */
     public int getKey_special() {
 		return key_special;
 	}
-    
-    public String getFileRes() {
-    	return Integer.toString(getHeight())+Integer.toString(getWidth());
-    	
-    	
-    }
-    
-    
+
     
     
     //END
     
     //SETTERS
-
-    /**
-     *
-     * @param height
-     */
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    /**
-     *
-     * @param width
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     /**
      *
      * @param key_down

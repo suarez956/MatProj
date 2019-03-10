@@ -1,0 +1,10 @@
+H res/img/entities/hrac.png 100 200
+M res/maps/mapa3.txt
+Z res/img/pickups/health.png 900 165
+P res/img/entities/pavouk.png 900 400
+K res/img/entities/kostlivec.png 1600 175
+G res/img/pickups/diamond_golden.png 2100 375
+K res/img/entities/kostlivec.png 2600 275
+Z res/img/pickups/health.png 3550 365
+P res/img/entities/pavouk.png 4250 300 8
+GE res/img/pickups/diamond_golden.png 4800 375

@@ -3,6 +3,7 @@ package core.entities;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +12,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.AudioLoader;
+import org.newdawn.slick.util.ResourceLoader;
 
 import core.GameStart;
 import core.LevelRendering.Tile;
@@ -21,25 +25,34 @@ import it.randomtower.engine.entity.Entity;
 
 @SuppressWarnings("unused")
 public class Player extends Entity {
-
-	// TODO Health, Battery Bar, !!GRAPHICS!!, animation, throwing a pickaxe, climbing a rope, placing dynamite
+	
 	private SpriteSheet sheet;
 	private boolean fall = true;
 	private boolean orientation = false; 	// false=> -> ; true => <-
 	private float n_height;
 	private File player_config;
 	private double jump_diff = 0;
+	private static int health = 3;
+	private Audio movement;
 	
-	static public float delta_x = 0f;
-	static public float delta_y = 0f;
+	
+	public static float delta_x = 0f;
+	public static float delta_y = 0f;
 
 	public Player(float x, float y, SpriteSheet playersheet,Config config) {
 		super(x, y);
 		setAnimations(playersheet);
-		String name = "PLAYER";
-		setCollision(name);
+		setHitBox(4, 0, 46, 88);
+		addType("PLAYER");
 		defControl(config);
 		this.sheet = playersheet;
+		
+		try {
+			movement = AudioLoader.getAudio("OGG", ResourceLoader.getResourceAsStream("res/sfx/player.ogg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	void defControl(Config config) {
 		define("JUMP",config.getKey_up());
@@ -48,10 +61,8 @@ public class Player extends Entity {
 		define("RIGHT",config.getKey_right());
 		define("SPECIAL",config.getKey_special());
 	}
-
-	private void setCollision(String name) {
-		setHitBox(4, 0, 46, 88);
-		addType(name);
+	public boolean getOrientation() {
+		return orientation;
 	}
 	
 	private void setAnimations(SpriteSheet playersheet) {
@@ -61,8 +72,6 @@ public class Player extends Entity {
 		addAnimation("NO_MOVE_R", false, 1, 2);
 		addAnimation("MOVE_LEFT", true, 0, 2, 3, 4, 5, 0, 1);
 		addAnimation("MOVE_RIGHT", true, 1, 2, 3, 4, 5, 0, 1);
-		//addAnimation("THROW", true,2,0,1,2);
-		//addAnimation("JUMP", true, 3, 0,1,2,3,3,2,1);
 	}
 	public float getHeight() {
 		return n_height;
@@ -75,20 +84,27 @@ public class Player extends Entity {
 		float previous_x = 0f;
 		float previous_y = 0f;
 		if(collide("Tile", x-5, y)==null && check("LEFT")) {
-				currentAnim = "MOVE_LEFT";								
-				orientation = false;
-					previous_x = x;
-					x-=0.5;
-					delta_x = previous_x-x;		
+			if(!movement.isPlaying()) {
+				movement.playAsSoundEffect(1f, 1f, false);
+			}
+			currentAnim = "MOVE_LEFT";								
+			orientation = false;
+				previous_x = x;
+				x-=0.5;
+				delta_x = previous_x-x;		
 		}
 		else if(collide("Tile", x+5, y)==null && check("RIGHT")) {
-				currentAnim = "MOVE_RIGHT";
-				orientation = true;
-					previous_x = x;
-					x+=0.5;
-					delta_x = previous_x-x;
+			if(!movement.isPlaying()) {
+				movement.playAsSoundEffect(1f, 1f, false);
+			}
+			currentAnim = "MOVE_RIGHT";
+			orientation = true;
+				previous_x = x;
+				x+=0.5;
+				delta_x = previous_x-x;
 		}
 		else {
+			movement.stop();
 			delta_x = 0f;
 			if(orientation==true) {
 				currentAnim="NO_MOVE_R";
@@ -125,6 +141,12 @@ public class Player extends Entity {
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		super.render(gc, g);
 		
+	}
+	public static int getHealth() {
+		return health;
+	}
+	public static void setHealth(int health) {
+		Player.health = health;
 	}
 	
 	

@@ -1,0 +1,19 @@
+H res/img/entities/hrac.png 200 150
+M res/maps/mapa4.txt
+G res/img/pickups/diamond_golden.png 500 375
+P res/img/entities/pavouk.png 700 350
+Z res/img/pickups/health.png 1050 160
+G res/img/pickups/diamond_golden.png 1050 475
+Z res/img/pickups/health.png 1100 460
+K res/img/entities/kostlivec.png 1450 125
+K res/img/entities/kostlivec.png 2050 225
+P res/img/entities/pavouk.png 2200 550
+K res/img/entities/kostlivec.png 1650 475
+P res/img/entities/pavouk.png 950 650
+K res/img/entities/kostlivec.png 800 575
+G res/img/pickups/diamond_golden.png 250 675
+W res/img/pickups/blue_pickaxe.png 2250 1025 3
+G res/img/pickups/diamond_golden.png 1300 925
+P res/img/entities/pavouk.png 950 1350
+P res/img/entities/pavouk.png 1500 1350
+GE res/img/pickups/diamond_golden.png 2575 1375

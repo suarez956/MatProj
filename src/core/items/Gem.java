@@ -25,17 +25,17 @@ public class Gem extends Entity{
 
 	@Override
 	public void update(GameContainer arg0, int arg1) throws SlickException {
-		// TODO Auto-generated method stub
 		super.update(arg0, arg1);
 		if(world instanceof Game) {
 			x+=(Player.delta_x)*10;
 			y+=(Player.delta_y)*10;
 		}
 		if (collide("PLAYER", x, y) != null) {
-				this.destroy();
-				Game.score+=50;
+				Game.score+=100;
 				if (ender) {
 					Game.score+=500;
+				}else {
+					this.destroy();
 				}
 		}
 	}

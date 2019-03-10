@@ -42,7 +42,6 @@ public class GameStart extends StateBasedGame {
 	public boolean show_fps = false;
 	public static LevelManager lm = new LevelManager(0, 0);
 	
-	
 	public boolean getShow_FPS() {
 		return show_fps;
 	}
@@ -61,13 +60,13 @@ public class GameStart extends StateBasedGame {
 	 */
 	public static void main(String[] args) throws SlickException, FileNotFoundException {
 		System.setProperty("java.library.path", "lib"); 
-		System.setProperty("org.lwjgl.librarypath", new File("lib/natives").getAbsolutePath());
+		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
 		System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
 		cfg.load();
 		config_window = new Config_Window(cfg);
 		ME.debugEnabled = false;
-		app = new AppGameContainer(new GameStart("Project Caveman"), cfg.getHeight(), cfg.getWidth(), false);
-		app.setTargetFrameRate(1024);
+		app = new AppGameContainer(new GameStart("Project Caveman"), 800,600, false);
+		app.setTargetFrameRate(60);
 		app.start();
 		app.setShowFPS(true);
 	}
@@ -95,13 +94,6 @@ public class GameStart extends StateBasedGame {
 	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
-		if (key == Input.KEY_F2) {
-			if (config_window.isVisible()) {
-				config_window.setVisible(false);
-			} else {
-				config_window.setVisible(true);
-			}
-		}
 		if (key == Input.KEY_F5) {
 			if (app.isFullscreen()) {
 				try {
@@ -117,33 +109,17 @@ public class GameStart extends StateBasedGame {
 				}
 			}
 		}
-		if (key == Input.KEY_ESCAPE) {			
-			System.exit(0);
-		}
 		if (key == Input.KEY_F1) {
 			show_fps = !show_fps;
 		}
-		if (key == Input.KEY_M){
+		/*if (key == Input.KEY_M){
 			ME.debugEnabled = !ME.debugEnabled;
+		}*/
+		if (key == Input.KEY_F8) {
+			app.setSoundVolume(app.getSoundVolume()-0.5f);
 		}
-	}
-
-	@Override
-	public void mousePressed(int button, int x, int y) {
-		super.mousePressed(button, x, y);
-		try {
-			if(x>=app.getWidth() / 2 - 50 && x<=app.getWidth() / 2 +50) {
-				if(y>=app.getHeight() / 2 +30 && y<=app.getHeight() / 2 +50) {
-					config_window = new Config_Window(cfg);
-					if (config_window.isVisible()) {
-						config_window.setVisible(false);
-					} else {
-						config_window.setVisible(true);
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (key == Input.KEY_F9) {
+			app.setSoundVolume(app.getSoundVolume()+0.5f);
 		}
 	}
 }

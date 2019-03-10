@@ -1,0 +1,12 @@
+H res/img/entities/hrac.png 200 100
+M res/maps/mapa5.txt
+K res/img/entities/kostlivec.png 500 325 15
+P res/img/entities/pavouk.png 1450 400 10
+P res/img/entities/pavouk.png 2150 850 15
+P res/img/entities/pavouk.png 1100 850 10
+K res/img/entities/kostlivec.png 500 1375 10
+K res/img/entities/kostlivec.png 1700 1375 10
+P res/img/entities/pavouk.png 1850 1900 18
+K res/img/entities/kostlivec.png 1650 1825 15
+P res/img/entities/pavouk.png 1600 1900 18
+GE res/img/pickups/diamond_golden.png 200 1925
