@@ -1,4 +1,7 @@
-Maturitní projekt SPŠE a VOŠ Pardubice\n
-Název: Project Caveman\n
-Vytvořeno: Jan Sauer\n
-License: viz License.md (MIT)\n
+Maturitní projekt SPŠE a VOŠ Pardubice
+
+Název: Project Caveman
+
+Vytvořeno: Jan Sauer
+
+License: viz License.md (MIT)
