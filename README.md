@@ -4,4 +4,4 @@ Název: Project Caveman
 
 Vytvořil: Jan Sauer
 
-License: viz License.md (MIT)
+License: viz License (MIT)
